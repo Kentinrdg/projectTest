@@ -27,6 +27,9 @@ public class LoginRequest {
 		return password;
 	}
 
+	/**
+	 * @param password
+	 */
 	public void setPassword(String password) {
 		this.password = password;
 	}
