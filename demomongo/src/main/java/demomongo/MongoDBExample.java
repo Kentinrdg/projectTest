@@ -8,19 +8,20 @@ import model.MyData;
 
 @Component
 public class MongoDBExample {
-    private final MongoTemplate mongoTemplate;
+	private final MongoTemplate mongoTemplate;
 
-    @Autowired
-    public MongoDBExample(MongoTemplate mongoTemplate) {
-        this.mongoTemplate = mongoTemplate;
-    }
+	@Autowired
+	public MongoDBExample(MongoTemplate mongoTemplate) {
+		this.mongoTemplate = mongoTemplate;
+	}
 
-    public void insertData() {
-    	mongoTemplate.createCollection("EP");
-        // Création d'un objet pour représenter les données à insérer
-        MyData data = new MyData("foo", "bar");
+	public void insertData() {
+		mongoTemplate.createCollection("EP");
+		// Création d'un objet pour représenter les données à insérer
+		MyData data = new MyData("foo", "bar");
+		// toto
 
-        // Insertion des données dans la collection "myCollection"
-        mongoTemplate.insert(data, "EP");
-    }
+		// Insertion des données dans la collection "myCollection"
+		mongoTemplate.insert(data, "EP");
+	}
 }
