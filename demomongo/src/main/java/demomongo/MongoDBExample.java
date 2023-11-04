@@ -20,6 +20,7 @@ public class MongoDBExample {
 		// Création d'un objet pour représenter les données à insérer
 		MyData data = new MyData("foo", "bar");
 		// toto
+
 		// Insertion des données dans la collection "myCollection"
 		mongoTemplate.insert(data, "EP");
 	}
