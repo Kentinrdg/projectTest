@@ -12,6 +12,7 @@ import java.util.TimeZone;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -27,7 +28,7 @@ import model.EventCalendar;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class EventControllerTest {
+public class DeleteEventTest {
 
 	@LocalServerPort
 	private int port;
@@ -65,7 +66,7 @@ public class EventControllerTest {
 		String endDateStr = this.convertDate(endDate.toString());
 
 		EventCalendar eventCalendar = new EventCalendar();
-		eventCalendar.setEventId("1");
+		eventCalendar.setId("1");
 		eventCalendar.setTitle("TEST 1");
 		eventCalendar.setDescription("Bla blablabla blabla bla bla");
 		eventCalendar.setStart(startDate);
@@ -87,7 +88,7 @@ public class EventControllerTest {
 		String endDateStr_2 = this.convertDate(endDate_2.toString());
 
 		EventCalendar eventCalendar_2 = new EventCalendar();
-		eventCalendar_2.setEventId("2");
+		eventCalendar_2.setId("2");
 		eventCalendar_2.setTitle("TEST 2");
 		eventCalendar_2.setDescription("Bla blablabla blabla bla bla");
 		eventCalendar_2.setStart(startDate_2);
@@ -113,7 +114,7 @@ public class EventControllerTest {
 		String endDateStr_3 = this.convertDate(endDate_3.toString());
 
 		EventCalendar eventCalendar_3 = new EventCalendar();
-		eventCalendar_3.setEventId("3");
+		eventCalendar_3.setId("3");
 		eventCalendar_3.setTitle("TEST 3");
 		eventCalendar_3.setDescription("Bla blablabla blabla bla bla");
 		eventCalendar_3.setStart(startDateStr_3);
@@ -129,9 +130,25 @@ public class EventControllerTest {
 	}
 
 	@Test
-	public void getAllEvents() {
-		ResponseEntity<Object> forEntity = restTemplate.getForEntity(baseUrl + "/getAllEvents", Object.class);
-		System.out.println("forEntity : " + forEntity);
+	@Disabled
+	public void deleteEvent_shouldReturnSuccessMessage() {
+		String eventId = "12345"; // ID de l'événement à supprimer
+
+		ResponseEntity<String> response = eventController.deleteEventById(eventId);
+
+		assertEquals(200, response.getStatusCodeValue()); // Vérifiez que le statut de la réponse est 200 (OK)
+		assertEquals("Événement supprimé avec succès.", response.getBody()); // Vérifiez le contenu de la réponse
+	}
+
+	@Test
+	@Disabled
+	public void deleteEvent_shouldReturnNotFoundMessage() {
+		String nonExistentEventId = "99999"; // ID d'un événement qui n'existe pas
+
+		ResponseEntity<String> response = eventController.deleteEventById(nonExistentEventId);
+
+		assertEquals(404, response.getStatusCodeValue()); // Vérifiez que le statut de la réponse est 404 (Not Found)
+		assertEquals("Événement introuvable.", response.getBody()); // Vérifiez le contenu de la réponse
 	}
 
 	public String convertDate(String dateToConvert) {

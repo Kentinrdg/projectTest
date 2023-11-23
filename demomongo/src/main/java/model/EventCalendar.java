@@ -1,13 +1,18 @@
 package model;
 
+import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 @Document(collection = "events")
 public class EventCalendar {
 
-	@Field("id")
-	public String id;
+	@Id
+	private ObjectId id;
+
+	@Field("eventId")
+	public String eventId;
 
 	@Field("title")
 	public String title;
@@ -21,30 +26,35 @@ public class EventCalendar {
 	@Field("description")
 	public String description;
 
+	@Field("backgroundColor")
+	public String backgroundColor;
+
 	public EventCalendar() {
 
 	}
 
-	public EventCalendar(String id, String title, String start, String end, String description) {
-		this.id = id;
+	public EventCalendar(String eventId, String title, String start, String end, String description,
+			String backgroundColor) {
+		this.eventId = eventId;
 		this.title = title;
 		this.start = start;
 		this.end = end;
 		this.description = description;
+		this.backgroundColor = backgroundColor;
 	}
 
 	/**
 	 * @return the id
 	 */
-	public String getId() {
-		return id;
+	public String getEventId() {
+		return eventId;
 	}
 
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(String id) {
-		this.id = id;
+	public void setEventId(String id) {
+		this.eventId = id;
 	}
 
 	/**
@@ -101,6 +111,20 @@ public class EventCalendar {
 	 */
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	/**
+	 * @return the backgroundColor
+	 */
+	public String getBackgroundColor() {
+		return backgroundColor;
+	}
+
+	/**
+	 * @param backgroundColor the backgroundColor to set
+	 */
+	public void setBackgroundColor(String backgroundColor) {
+		this.backgroundColor = backgroundColor;
 	}
 
 }
